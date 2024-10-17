@@ -14,23 +14,22 @@
 🐍 Python: `The backbone of the project.`
 🧰 PyTerrier: `For retrieval and indexing.`
 📊 Ranx: `For model evaluation.`
-🚀 tqdm: `For progress tracking.`
 
 # 📋 How to Run the Project
-Clone the Repository: `git clone https://github.com/yourusername/ubuntu-information-retrieval-system.git`
-
+```bash
+Clone the Repository: `git clone https://github.com/Aubin01/Project1-IR.git`
 Install Dependencies: `Install the necessary libraries using pip`
-- pip install pyterrier tqdm ranx
+- pip install pyterrier ranx
 
 # Run the Retrieval System: `Build the index, perform retrieval, and run evaluation:`
 - `requirements: mkdir -p results`
-
+# Time frame: It will take between 5 and 8 minutes for the both models' results to be written!
 1. `Sample command to run the check.py`
 ```bash
 python3 check.py \
- --answers_file files/Answers.json \
- --topics_1_file files/topics_1.json \
- --topics_2_file files/topics_2.json \
+ --answers_file data/Answers.json \
+ --topics_1_file data/topics_1.json \
+ --topics_2_file data/topics_2.json \
  --output_file_tfidf_1 results/output_tfidf_1.tsv \
  --output_file_tfidf_2 results/output_tfidf_2.tsv \
  --output_file_bm25_1 results/output_bm25_1.tsv \
@@ -57,7 +56,7 @@ python query.py \
 # 📂 Project Structure
 ```bash
 Ubuntu/
-├── files/
+├── data/
 │   ├── Answers.json          # Dataset containing Ubuntu-related technical documents
 │   ├── qrel_1.trec           # Ground truth relevance judgments (Qrels)
 │   ├── topics_1.json         # Predefined queries (topics)
@@ -74,7 +73,7 @@ Ubuntu/
 │   ├── check.py              # Script for testing or preprocessing
 │   ├── evaluate.py           # Script to evaluate retrieval results
 │   ├── load_data.py          # Utility functions to load and process data
-│   ├── query.py              # Main script for querying and retrieval
+│   ├── query.py              # script to run retrieval for user provided queries
 └── README.md                 # Project documentation
 
 
