@@ -20,6 +20,9 @@
 Clone the Repository: `git clone https://github.com/Aubin01/Project1-IR.git`
 Install Dependencies: `Install the necessary libraries using pip`
 - pip install pyterrier ranx
+## 📥 Download Dataset
+```bash
+You can download the dataset from Google Drive by clicking [here](https://drive.google.com/drive/folders/1GGRWCf9cRP2DfrlUJ7ihZMKIOxQAC-wX?usp=drive_link).
 
 # Run the Retrieval System: `Build the index, perform retrieval, and run evaluation:`
 - `requirements: mkdir -p results`
