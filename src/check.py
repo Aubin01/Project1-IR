@@ -7,11 +7,6 @@ def save_results(results, output_file, model_name):
     """
     Save the results in TREC format with a .tsv extension and use the model name
     as the system name in the output file.
-
-    Args:
-        results (DataFrame): The retrieval results.
-        output_file (str): Path to the output .tsv file.
-        model_name (str): The name of the retrieval model (e.g., 'tf-idf', 'bm25').
     """
     # Update the output file extension to .tsv
     output_file = output_file.replace('.txt', '.tsv')
@@ -41,10 +36,15 @@ def main(answers_file, topics_1_file, topics_2_file, output_file_tfidf_1, output
         columns=["qid", "query"]
     )
 
-    # Running retrieval using the Retriever class
+    # Running retrieval using the tuned parameters with pt.terrier.Retriever
     print("Running retrieval...")
-    bm25 = pt.BatchRetrieve(index_ref, wmodel="BM25", num_results=100)
-    tfidf = pt.BatchRetrieve(index_ref, wmodel="TF_IDF", num_results=100)
+    bm25 = pt.terrier.Retriever(
+        index_ref,
+        wmodel="BM25",
+        num_results=10,
+        controls={"bm25.b": 0.75, "bm25.k_1": 1.5}
+    )
+    tfidf = pt.terrier.Retriever(index_ref, wmodel="TF_IDF", num_results=10)
 
     # Retrieve results for topics_1 and save
     results_tfidf_1 = tfidf.transform(queries_1)

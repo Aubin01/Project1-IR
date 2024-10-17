@@ -7,7 +7,6 @@ def load_qrels(qrel_file):
     """Load Qrels file."""
     return rx.Qrels.from_file(qrel_file)
 
-
 def evaluate_model(qrels, run_file, output_file, model_name):
     """
     Evaluate the model using different metrics and save the results.
@@ -35,7 +34,6 @@ def evaluate_model(qrels, run_file, output_file, model_name):
     print(f"\n=== Evaluation Metrics for {model_name} ===")
     print(df_results)
 
-
 def plot_precision_at_k(qrels, run_file, model_name):
     """
     Plot Precision@5 for each query to visualize the results in a ski-jump style.
@@ -50,7 +48,6 @@ def plot_precision_at_k(qrels, run_file, model_name):
     # Load the run
     run = rx.Run.from_file(run_file, kind="trec")
 
-
     # Compute Precision@5 for each query using `evaluate()` with `make_comparable=True`
     results_per_query = rx.evaluate(qrels, run, metrics=["precision@5"], return_mean=False, make_comparable=True)
 
@@ -62,14 +59,14 @@ def plot_precision_at_k(qrels, run_file, model_name):
     sorted_query_ids, sorted_precision = zip(*sorted_data)
 
     # Adding jitter to the precision values to avoid overlapping
-    jitter = np.random.uniform(-0.005, 0.005, size=len(sorted_precision))  # Smaller jitter
+    jitter = np.random.uniform(-0.005, 0.005, size=len(sorted_precision))
     sorted_precision = np.array(sorted_precision) + jitter
 
     # Create a DataFrame to store the results for easier manipulation
     df_p_at_5 = pd.DataFrame({'Query_ID': sorted_query_ids, 'P@5': sorted_precision})
 
     # Create the scatter plot
-    plt.figure(figsize=(12, 7))  # Adjust figure size for a ski-jump effect
+    plt.figure(figsize=(12, 7))
     plt.scatter(df_p_at_5['Query_ID'], df_p_at_5['P@5'], s=60, c='blue', alpha=0.8, edgecolors='black', linewidth=0.6, label=model_name)
     plt.title(f'Ski-Jump Plot for P@5 ({model_name} Model)')
     plt.xlabel('Topic (Query IDs)')
@@ -78,7 +75,7 @@ def plot_precision_at_k(qrels, run_file, model_name):
     plt.legend()
 
     # Limit the number of x-ticks for better readability
-    step = max(1, len(df_p_at_5['Query_ID']) // 15)  # Reducing the number of x-ticks
+    step = max(1, len(df_p_at_5['Query_ID']) // 15)
     plt.xticks(ticks=range(0, len(df_p_at_5['Query_ID']), step), labels=df_p_at_5['Query_ID'][::step], rotation=45)
 
     # Tight layout and saving the plot
@@ -87,6 +84,7 @@ def plot_precision_at_k(qrels, run_file, model_name):
     plt.savefig(plot_file)
     print(f"Ski-jump plot saved as {plot_file}")
     plt.show()
+
 def main(qrel_file, run_file_tfidf, run_file_bm25, output_file_tfidf, output_file_bm25):
     """
     Main function to evaluate both TF-IDF and BM25 models.
