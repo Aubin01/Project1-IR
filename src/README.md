@@ -25,6 +25,8 @@ Install Dependencies: `Install the necessary libraries using pip`
 # Run the Retrieval System: `Build the index, perform retrieval, and run evaluation:`
 - `requirements: mkdir -p results`
 
+1. `Sample command to run the check.py`
+```bash
 python3 check.py \
  --answers_file files/Answers.json \
  --topics_1_file files/topics_1.json \
@@ -34,34 +36,46 @@ python3 check.py \
  --output_file_bm25_1 results/output_bm25_1.tsv \
  --output_file_bm25_2 results/output_bm25_2.tsv
 
+ 2. `Sample command to run the evaluate.py`
+```bash
+ python evaluate.py \
+ --qrel_file /Users/aubinmugisha/Documents/Project1/data/qrel_1.trec \
+ --run_file_tfidf /Users/aubinmugisha/Documents/Project1/results/result_tfidf_1.tsv \
+ --run_file_bm25 /Users/aubinmugisha/Documents/Project1/results/result_bm25_1.tsv \
+ --output_file_tfidf /Users/aubinmugisha/Documents/Project1/results/eval_tfidf.csv \
+ --output_file_bm25 /Users/aubinmugisha/Documents/Project1/results/eval_bm25.csv
+
+  3. `Sample command to run the evaluate.py`
+```bash
+python query.py \                                                                       
+  --index_path /Users/aubinmugisha/Documents/Project1/src/index \                                    
+  --query "How do I sync contacts on Ubuntu Touch?" \                                              
+  --answers_file /Users/aubinmugisha/Documents/Project1/data/answers.json \                         
+  --results_dir /Users/aubinmugisha/Documents/Project1/results
+    
+
 # 📂 Project Structure
+```bash
 Ubuntu/
 ├── files/
-│   ├── Answers.json            # Dataset containing Ubuntu-related technical documents
-│   ├── qrel_1.trec             # Ground truth relevance judgments (Qrels)
-│   ├── topics_1.json           # Predefined queries (topics)
-│   └── topics_2.json           # Additional predefined queries
-│
-├── index/                      # Folder for storing the inverted index
-│
+│   ├── Answers.json          # Dataset containing Ubuntu-related technical documents
+│   ├── qrel_1.trec           # Ground truth relevance judgments (Qrels)
+│   ├── topics_1.json         # Predefined queries (topics)
+│   ├── topics_2.json         # Additional predefined queries
+├── index/                    # Folder for storing the inverted index
 ├── results/
-│   ├── bm25_evaluation.csv      # Evaluation metrics for BM25 model
-│   ├── bm25_results_1.tsv       # Retrieval results from BM25 for topics_1
-│   ├── bm25_results_2.tsv       # Retrieval results from BM25 for topics_2
-│   ├── bm25_user_results.trec   # BM25 results for user-provided query
-│   ├── tfidf_evaluation.csv     # Evaluation metrics for TF-IDF model
-│   ├── tfidf_results_1.tsv      # Retrieval results from TF-IDF for topics_1
-│   ├── tfidf_results_2.tsv      # Retrieval results from TF-IDF for topics_2
-│   └── tfidf_user_results.trec  # TF-IDF results for user-provided query
-│
+│   ├── bm25_evaluation.csv   # Evaluation metrics for BM25 model
+│   ├── bm25_results_1.tsv    # Retrieval results from BM25 for topics_1
+│   ├── bm25_results_2.tsv    # Retrieval results from BM25 for topics_2
+│   ├── tfidf_evaluation.csv  # Evaluation metrics for TF-IDF model
+│   ├── tfidf_results_1.tsv   # Retrieval results from TF-IDF for topics_1
+│   ├── tfidf_results_2.tsv   # Retrieval results from TF-IDF for topics_2
 ├── src/
-│   ├── check.py                 # Script for testing or preprocessing
-│   ├── evaluate.py              # Script to evaluate retrieval results
-│   ├── load_data.py             # Utility functions to load and process data
-│   └── query.py                 # Main script for querying and retrieval
-│
-├── README.md                    # Project documentation
-
+│   ├── check.py              # Script for testing or preprocessing
+│   ├── evaluate.py           # Script to evaluate retrieval results
+│   ├── load_data.py          # Utility functions to load and process data
+│   ├── query.py              # Main script for querying and retrieval
+└── README.md                 # Project documentation
 
 
 
