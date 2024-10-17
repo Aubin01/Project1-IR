@@ -44,7 +44,7 @@ python3 check.py \
  --output_file_tfidf /Users/aubinmugisha/Documents/Project1/results/eval_tfidf.csv \
  --output_file_bm25 /Users/aubinmugisha/Documents/Project1/results/eval_bm25.csv
 
-  3. `Sample command to run the evaluate.py`
+  3. `Sample command to run the query.py`
 ```bash
 python query.py \                                                                       
   --index_path /Users/aubinmugisha/Documents/Project1/src/index \                                    
